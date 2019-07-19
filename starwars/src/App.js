@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import { Card } from 'semantic-ui-react';
 import CharacterCard from './components/CharacterCard';
+import CharactedCardsGroup from './components/CharacterCardsGroup';
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -22,13 +23,7 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
-      <Card.Group centered itemsPerRow={5}>
-        {characters ? (
-          characters.map(character => <CharacterCard character={character} />)
-        ) : (
-          <h2>Loading...</h2>
-        )}
-      </Card.Group>
+      <CharactedCardsGroup characters={characters}/>
     </div>
   );
 };
