@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
 import CharacterCard from './CharacterCard';
-import styled from 'styled-components';
 
 function CharactedCardsGroup({ characters }) {
   return (

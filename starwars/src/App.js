@@ -8,7 +8,6 @@ const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
   const [characters, setCharacters] = useState(null);
-  const [species, setSpecies] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a
@@ -21,14 +20,10 @@ const App = () => {
     .then(res => {
       setCharacters(res.data.results);
       setTotalPages(Math.ceil(res.data.count / 10));
-      return res.data.results;
     })
     .catch(err => {
       console.log(err);
     })
-    .then(res => {
-      console.log(res);
-    });
   }, [currentPage]);
 
   if (characters) characters.forEach(character => console.log(character));
