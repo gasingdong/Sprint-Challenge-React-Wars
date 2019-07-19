@@ -6,11 +6,9 @@ import styled from 'styled-components';
 function CharactedCardsGroup({ characters }) {
   return (
     <Card.Group centered itemsPerRow={5}>
-      {characters ? (
+      { 
         characters.map(character => <CharacterCard character={character} />)
-      ) : (
-        <h2>Loading...</h2>
-      )}
+      }
     </Card.Group>
   );
 }

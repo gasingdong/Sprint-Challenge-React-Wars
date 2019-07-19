@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import { Pagination } from 'semantic-ui-react';
+import { Pagination, Dimmer, Loader } from 'semantic-ui-react';
 import CharactedCardsGroup from './components/CharacterCardsGroup';
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
   const [characters, setCharacters] = useState(null);
+  const [species, setSpecies] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
   useEffect(() => {
-    axios.get(`https://swapi.co/api/people?page=${currentPage}`).then(res => {
-      console.log(res);
+    setCharacters(null);
+    axios
+    .get(`https://swapi.co/api/people?page=${currentPage}`)
+    .then(res => {
       setCharacters(res.data.results);
+      setTotalPages(Math.ceil(res.data.count / 10));
+      return res.data.results;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    .then(res => {
+      console.log(res);
     });
   }, [currentPage]);
 
@@ -28,14 +40,25 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
-      <CharactedCardsGroup characters={characters} />
-      <div className="Pagination">
-        <Pagination
-          defaultActivePage={1}
-          totalPages={10}
-          onPageChange={onPageChange}
-        ></Pagination>
-      </div>
+      {
+        !characters 
+        ? <>
+            <Dimmer active>
+              <Loader>Loading</Loader>
+            </Dimmer>
+          </>
+        : <>
+            <CharactedCardsGroup characters={characters} />
+            <div className="Pagination">
+              <Pagination
+                defaultActivePage={1}
+                activePage={currentPage}
+                totalPages={totalPages}
+                onPageChange={onPageChange}
+              ></Pagination>
+            </div>
+          </>
+      }
     </div>
   );
 };
