@@ -1,17 +1,18 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
-import CharacterCard from './CharacterCard'; 
+import CharacterCard from './CharacterCard';
+import styled from 'styled-components';
 
-function CharactedCardsGroup({characters}) {
-    return (
-        <Card.Group centered itemsPerRow={5}>
-        {characters ? (
-          characters.map(character => <CharacterCard character={character} />)
-        ) : (
-          <h2>Loading...</h2>
-        )}
-        </Card.Group>
-    )
+function CharactedCardsGroup({ characters }) {
+  return (
+    <Card.Group centered itemsPerRow={5}>
+      {characters ? (
+        characters.map(character => <CharacterCard character={character} />)
+      ) : (
+        <h2>Loading...</h2>
+      )}
+    </Card.Group>
+  );
 }
 
 export default CharactedCardsGroup;

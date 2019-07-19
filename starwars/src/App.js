@@ -28,8 +28,14 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
-      <CharactedCardsGroup characters={characters}/>
-      <Pagination defaultActivePage={1} totalPages={10} onPageChange={onPageChange}></Pagination>
+      <CharactedCardsGroup characters={characters} />
+      <div className="Pagination">
+        <Pagination
+          defaultActivePage={1}
+          totalPages={10}
+          onPageChange={onPageChange}
+        ></Pagination>
+      </div>
     </div>
   );
 };
