@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import 'semantic-ui-css/semantic.min.css'
 import './App.css';
+import CharacterCard from './components/CharacterCard';
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -14,14 +14,20 @@ const App = () => {
     axios
     .get('https://swapi.co/api/people')
     .then((res) => {
-      console.log(res);
       setCharacters(res.data.results);
     })
   }, []);
 
+  if (characters) characters.forEach(character => console.log(character));
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
+      {
+        characters ? characters.map(character => 
+        (
+          <CharacterCard character={character} />
+        )) : <h2>Loading...</h2>
+      }
     </div>
   );
 }
