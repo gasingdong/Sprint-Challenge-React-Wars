@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import { Card } from 'semantic-ui-react';
 import CharacterCard from './components/CharacterCard';
 
 const App = () => {
@@ -17,14 +18,17 @@ const App = () => {
   }, []);
 
   if (characters) characters.forEach(character => console.log(character));
+
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
-      {characters ? (
-        characters.map(character => <CharacterCard character={character} />)
-      ) : (
-        <h2>Loading...</h2>
-      )}
+      <Card.Group centered itemsPerRow={5}>
+        {characters ? (
+          characters.map(character => <CharacterCard character={character} />)
+        ) : (
+          <h2>Loading...</h2>
+        )}
+      </Card.Group>
     </div>
   );
 };
